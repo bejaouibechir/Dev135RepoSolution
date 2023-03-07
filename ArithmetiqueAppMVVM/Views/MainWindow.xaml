@@ -1,0 +1,112 @@
+﻿<Window x:Class="ArithmetiqueAppMVVM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ArithmetiqueAppMVVM"
+        xmlns:vm="clr-namespace:ArithmetiqueAppMVVM.ViewModels"
+        xmlns:conv="clr-namespace:ArithmetiqueAppMVVM.Converters"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.DataContext>
+            <vm:ViewModel x:Name="vmodel"/>
+        </Grid.DataContext>
+        <Grid.Resources>
+            <conv:DisplayConverter x:Key="displayconverter"/>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Operations arithmétiques" Height="50" 
+                   Margin="15,0,0,0"
+                   FontSize="30"/>
+
+        <Grid Background="LightBlue" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock 
+                Grid.Row="1" VerticalAlignment="Center"
+                Margin="15,0,0,0"
+                FontSize="25"
+                Text="Première opérande:"/>
+            <TextBlock 
+                Grid.Row="2" VerticalAlignment="Center"
+                Margin="15,0,0,0"
+                FontSize="25"
+                Text="Deuxième opérande:"/>
+            <TextBlock 
+                Grid.Row="3" VerticalAlignment="Center"
+                Margin="15,0,0,0"
+                FontSize="25"
+                Text="Opération:"/>
+
+            <TextBox Grid.Row="1"
+                     Text="{Binding Model.Operande1,Mode=TwoWay
+                        ,UpdateSourceTrigger=PropertyChanged,FallbackValue=0}"
+                     Grid.Column="1"
+                     Margin="10"
+                     Name="txtoperande1" 
+                     FontSize="25"/>
+            <TextBox Grid.Row="2"
+                     Text="{Binding Model.Operande2,Mode=TwoWay,
+                        UpdateSourceTrigger=PropertyChanged}"
+                     Grid.Column="1"
+                     Margin="10"
+                     Name="txtoperande2" 
+                     FontSize="25"/>
+            <ComboBox Name="operationcmb" 
+                     Margin="10"
+                     Grid.Row="3"
+                     Grid.Column="1">
+                <ComboBoxItem FontSize="20">Addition "+"</ComboBoxItem>
+                <ComboBoxItem FontSize="20">Soustraction "-"</ComboBoxItem>
+                <ComboBoxItem FontSize="20">Multiplcation "*"</ComboBoxItem>
+                <ComboBoxItem FontSize="20">Division "/"</ComboBoxItem>
+            </ComboBox>
+
+        </Grid>
+
+
+        <StackPanel HorizontalAlignment="Right"
+                    Margin="15" Orientation="Horizontal" 
+                    Height="50"
+                    Grid.Row="2">
+            <Label Name="lblResultat" Margin="0,0,50,0"
+                   Height="40" Width="300" FontSize="20">
+                <TextBlock Margin="5,0,0,0" 
+                           FontSize="25"
+                           Text="{Binding Model.Resultat,Mode=OneWay,
+                                    Converter={StaticResource displayconverter},
+                                   UpdateSourceTrigger=PropertyChanged}"/>
+            </Label> 
+                   
+
+            <Button Content="Cancel"
+                    Command="{Binding CancelCmd}"
+                    Click="Button_Click"
+                    Width="100" 
+                    FontSize="20" 
+                    />
+            <Button Margin="5,0,0,0" Content="Calculate"
+                    Command="{Binding CalculateCmd}"
+                    CommandParameter="{Binding ElementName=operationcmb, 
+                                    Path=SelectedIndex}"
+                    Width="200"
+                    FontSize="20" 
+                    />
+        </StackPanel>
+
+    </Grid>
+</Window>
