@@ -2,15 +2,38 @@
 //#define unitofwork
 //using ConsoleApp.MVC;
 using ConsoleApp.MVP;
+using System;
+using System.Linq;
 
 namespace ConsoleApp
 {
     class Program
     {
+        static Func<double, double,double> procédure;
         static void Main(string[] args)
         {
-            
+            procédure = affiche;
+            procédure.Invoke(12, 13);
+
+            procédure = somme;
+            procédure.Invoke(12, 13);
         }
+
+        static double somme(double a,double b)
+        {
+            double result = a + b;
+            Console.WriteLine(result);
+            return result;
+        }
+
+        static double affiche(double a, double b)
+        {
+            Console.WriteLine(a);
+            Console.WriteLine(b);
+            return 0;
+        }
+
+
 
     }
 }
