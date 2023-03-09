@@ -122,13 +122,13 @@ namespace WPFProjects.Calculator.Start
             {
                 _model.FirstOperand = _firstOperand;
                 _isfirstoperandset = true;
-                _issecondoperadset = false;
+                //_issecondoperadset = false;
             }
             else
             {
                 _model.SecondOperand = _secondOperand;
                 _isfirstoperandset = true;
-                _issecondoperadset = true;
+               // _issecondoperadset = true;
             }
 
             _lastoperation = operation;
@@ -142,7 +142,7 @@ namespace WPFProjects.Calculator.Start
                     DisplayBox.Text = _display;
                     //Reset first operand
                     _isfirstoperandset = true;
-                    _issecondoperadset = false;
+                    //_issecondoperadset = false;
                     _model.FirstOperand = _display;
                     ExpressionBox.Text = _fullExpression;
                 }

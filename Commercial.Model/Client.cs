@@ -8,11 +8,11 @@ namespace Commercial.Model
 {
     public class Client
     {
-
         public Client()
         {
-            Contacts= new HashSet<Contact>();
-            Ventes= new HashSet<Vente>();
+                Contacts = new HashSet<Contact>();
+                Ventes = new HashSet<Vente>();
+                Parrainés = new HashSet<Client>();    
         }
         public string Code { get; set; } // 1111/11 où 11 est le code de société
         public string Nom { get; set; }
@@ -27,7 +27,8 @@ namespace Commercial.Model
 
         public string LieuCIN { get; set; }
 
-        public string Parrain { get; set; }
+        //Clé étrangère
+        public string ParrainId { get; set; }
 
         public string Observation { get; set; }
 
@@ -42,6 +43,10 @@ namespace Commercial.Model
         public virtual ICollection<Contact> Contacts { get; set; }
 
         public virtual ICollection<Vente> Ventes { get; set; }
+
+        public virtual ICollection<Client> Parrainés { get; set; }
+
+        public virtual Client Parrain { get; set; }
 
     }
 }
