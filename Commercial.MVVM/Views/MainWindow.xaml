@@ -4,9 +4,219 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Commercial.MVVM"
+        xmlns:cmd="clr-namespace:Commercial.MVVM.Helpers"
+        xmlns:vm="clr-namespace:Commercial.MVVM.ViewModels"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Name="window"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" >
+        Title="MainWindow" Height="800"
+        Style="{StaticResource mainwindowstyle}"
+        Width="1280"
+         MinWidth="1100" MinHeight="750">
+    <Window.DataContext>
+        <vm:MainSociétéViewModel x:Name="msociétévm"/>
+    </Window.DataContext>
     <Grid>
-      
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.25*" />
+            <RowDefinition Height="9*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <TabControl>
+                <TabItem Header="Société">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+                        
+             <!--#region  Barre de naviguation-->           
+                        <Grid MinHeight="50" MaxHeight="60">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="4*" />
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="1" >
+                                <Viewbox>
+                                    <Path Fill="#2B579f"
+                                          Data="{StaticResource firstlast}">
+                                    </Path>
+                                </Viewbox>
+                            </Button>
+                            <Button Grid.Column="2">
+                                <Grid>
+                                    <Ellipse Fill="#2B579f" Margin="1"/>
+                                    <Path VerticalAlignment="Center"
+                                          HorizontalAlignment="Left"
+                                          Width="18"
+                                          Height="25"
+                                          Fill="White" 
+                                          Data="{StaticResource previousnext}" Stretch="Fill" Margin="18,0,0,0">
+                                        <Path.LayoutTransform>
+                                            <RotateTransform Angle="180"/>
+                                        </Path.LayoutTransform>
+                                    </Path>
+                                </Grid>
+                            </Button>
+                            <ComboBox Height="40"  Grid.Column="3">
+                                <ComboBoxItem  Content="Plage de 5"  />
+                                <ComboBoxItem  Content="Plage de 10" />
+                                <ComboBoxItem  Content="Plage de 20" />
+                            </ComboBox>
+                            <Button Grid.Column="4" >
+                                <Grid>
+                                    <Ellipse Fill="#2B579f" Margin="1"/>
+                                    <Path VerticalAlignment="Center"
+                                          HorizontalAlignment="Left"
+                                          Width="18"
+                                          Height="25"
+                                          Fill="White" 
+                                          Data="{StaticResource previousnext}" Stretch="Fill" Margin="24,0,0,0">
+
+                                    </Path>
+                                </Grid>
+                            </Button>
+
+                            <Button Grid.Column="5" >
+                                <Viewbox>
+                                    <Path Fill="#2B579f"
+                                          Data="{StaticResource firstlast}">
+                                        <Path.LayoutTransform>
+                                            <RotateTransform Angle="180"/>
+                                        </Path.LayoutTransform>
+                                    </Path>
+                                </Viewbox>
+                            </Button>
+                            <Button Grid.Column="6"
+                                  Command="{Binding ShowAddSociétéWinCommand}"  
+                                    >
+                                <Grid>
+                                    <Ellipse Fill="#2B579f" Margin="2"/>
+                                    <Path Fill="White" Data="{StaticResource add}" Margin="12,15,14,13" Stretch="Fill"/>
+                                </Grid>
+                            </Button>
+                            <Button Grid.Column="7" >
+                                <Grid>
+                                    <Ellipse Fill="#2B579f" Margin="2"/>
+                                    <Path Fill="White" Data="{StaticResource edit}" Margin="12,15,14,13" Stretch="Fill"/>
+                                </Grid>
+                            </Button>
+                            <Button Grid.Column="8" >
+                                <Grid>
+                                    <Ellipse Fill="#2B579f" Margin="2"/>
+                                    <Path Fill="White" Data="{StaticResource save}" Margin="12,15,14,13" Stretch="Fill"/>
+                                </Grid>
+                            </Button>
+                            <Button Grid.Column="9">
+                                <Grid>
+                                    <Ellipse Fill="#2B579f" Margin="2"/>
+                                    <Viewbox Width="35">
+                                        <Path Fill="White" Data="{StaticResource print}" Margin="12,15,14,13" Stretch="Fill"/>
+                                    </Viewbox>
+                                </Grid>
+                            </Button>
+                            <Button Grid.Column="10" >
+                                <Grid>
+                                    <Ellipse Fill="#2B579f" Margin="2"/>
+                                    <Viewbox Width="35">
+                                        <Path Fill="White" Data="{StaticResource clearfilter}" Margin="12,15,14,13" Stretch="Fill"/>
+                                    </Viewbox>
+                                </Grid>
+                            </Button>
+                        </Grid>
+             <!--#endregion-->     
+                        
+             <!--#region  Zone de recherche -->
+                        <Grid Margin="10" Grid.Row="1" Height="60" Grid.ColumnSpan="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel 
+                            Margin="2"
+                            Orientation="Vertical">
+                                <TextBlock  Text="Code"/>
+                                <TextBox 
+                                         
+                                         Name="txtCodeSociété" 
+                                         Foreground="#2B579f"
+                                         Grid.Row="1" >
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="TextChanged">
+                                            <i:InvokeCommandAction Command="{Binding SearchSociétéByCodeCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </TextBox>
+
+                            </StackPanel>
+                            <GridSplitter Grid.Column="1"
+                                  HorizontalAlignment="Stretch"
+                                  Width="4" ResizeBehavior="BasedOnAlignment" 
+                                  ResizeDirection="Auto"             
+                                      />
+                            <StackPanel
+                            Margin="2"
+                            Grid.Column="2" Orientation="Vertical">
+                                <TextBlock  Text="Raison"/>
+                                <TextBox
+                                    Foreground="#2B579f"
+                                    Name="txtRaisonSociété"
+                                     Grid.Row="1" />
+                            </StackPanel>
+                            <GridSplitter Grid.Column="3"
+                                  HorizontalAlignment="Stretch"
+                                  Width="4" ResizeBehavior="BasedOnAlignment" 
+                                  ResizeDirection="Auto"             
+                                      />
+                        </Grid>
+                        <!--#endregion-->
+                        <DataGrid Grid.Row="2" Background="DarkGray" ItemsSource="{Binding Sociétés,
+                            Mode=TwoWay,
+                            UpdateSourceTrigger=PropertyChanged}"
+                            AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Code" 
+                                                    Width="0.5*"
+                                                    Binding="{Binding Code,UpdateSourceTrigger=PropertyChanged}"/>
+                                <DataGridTextColumn Header="Raison" 
+                                                    Width="3*"
+                                                    Binding="{Binding Raison,UpdateSourceTrigger=PropertyChanged}"/>
+                                <DataGridTextColumn Header="Nombre de clients" 
+                                                    Width="*"
+                                                    Binding="{Binding NombreClients,UpdateSourceTrigger=PropertyChanged}"/>
+                                <DataGridTextColumn Header="Chiffre d'affaires" 
+                                                    Width="*"
+                                                    Binding="{Binding Chiffre_Affaires,UpdateSourceTrigger=PropertyChanged}"/>
+                                <DataGridTextColumn Header="Dettes" 
+                                                    Width="*"
+                                                    Binding="{Binding Dettes,UpdateSourceTrigger=PropertyChanged}"/>
+                                <DataGridTextColumn Header="Observation" 
+                                                    Width="*"
+                                                    Binding="{Binding Observation,UpdateSourceTrigger=PropertyChanged}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Client"/>
+            </TabControl>
+        </Grid>
+        <StatusBar Grid.Row="2" MinHeight="30" />
     </Grid>
 </Window>

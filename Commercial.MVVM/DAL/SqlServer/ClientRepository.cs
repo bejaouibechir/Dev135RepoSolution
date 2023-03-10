@@ -7,7 +7,7 @@ using System.Data.Entity.Migrations;
 
 namespace Commercial.MVVM.DAL.SqlServer
 {
-    public class ClientRepository : IRepository<Client, string>
+    public class ClientRepository : IRepository<Client, string> 
     {
         CommercialContext _context;
 

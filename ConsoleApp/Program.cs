@@ -4,37 +4,28 @@
 using ConsoleApp.MVP;
 using System;
 using System.Linq;
+using System.Text;
 
 namespace ConsoleApp
 {
     class Program
     {
-        static Func<double, double,double> procédure;
+        static Random rand = new Random(); 
         static void Main(string[] args)
         {
-            procédure = affiche;
-            procédure.Invoke(12, 13);
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < 20; i++)
+            {
+                builder.AppendLine("INSERT INTO [dbo].[Sociétés]" +
+                   "([Raison],[NombreClients],[Chiffre_Affaires]" +
+                   $",[Dettes],[Observation]) VALUES('société{i++}',{rand.Next(25, 250)}" +
+                   $",{rand.Next(25000, 100000)}, {rand.Next(30000, 150000)},'observation{i++}')"); 
+            }
 
-            procédure = somme;
-            procédure.Invoke(12, 13);
+            string content = builder.ToString();
+
+
         }
-
-        static double somme(double a,double b)
-        {
-            double result = a + b;
-            Console.WriteLine(result);
-            return result;
-        }
-
-        static double affiche(double a, double b)
-        {
-            Console.WriteLine(a);
-            Console.WriteLine(b);
-            return 0;
-        }
-
-
-
     }
 }
 

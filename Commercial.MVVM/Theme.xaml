@@ -1,4 +1,78 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+
+
+    <Style x:Key="addsociétébtnstyle" TargetType="Button">
+        <Setter Property="Background" Value="LightCyan"/>
+        <Setter Property="BorderBrush" Value="#2B579f"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <Style x:Key="mainwindowstyle" TargetType="Window">
+        <Setter Property="Background" Value="#2B579f"  />
+    </Style>
+    
+    <!--#region Menu -->
+    <Style TargetType="Button">
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border>
+                        <ContentPresenter Content="{TemplateBinding Content}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        
+    </Style>
+    <Style TargetType="ComboBox">
+        <Setter Property="Margin" Value="2"/>
+    </Style>
+    <!--#endregion-->
+
+    <!--#region Style de tabl control --> 
+
+    <Style TargetType="TabControl">
+        <Setter Property="TabStripPlacement" Value="Top"/>
+    </Style>
+    <Style TargetType="TabItem">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Border x:Name="PART_Border" Background="{TemplateBinding Background}" BorderThickness="1,1,1,0"
+                            BorderBrush="Transparent" Margin="0,0,0,0" CornerRadius="2,2,0,0" Padding="50,0,50,0">
+                                <ContentPresenter ContentSource="Header" Margin="5" />
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                            <Setter Property="Background" Value="WhiteSmoke"/>
+                            <Setter Property="Foreground" Value="#2B579f"/>
+                            <Setter Property="Margin" Value="0,0,0,-3"/>
+                        </Trigger>
+
+                        <Trigger Property="IsSelected" Value="false">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Margin" Value="0"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+ <!--#endregion-->
+
+    <Geometry x:Key="heart">
+        M 60 4.346 C 71 4.346 80 13.973 80 25.738 C 80 58.45 40 74.762 40 75.65299999999999 L 40 75.65299999999999 C 40 74.763 0 58.54 0 25.738 C 0 13.884 9 4.346 20 4.346 C 31.1 4.346 40 10.835 40 22.689 C 40 10.835 48.9 4.346 60 4.346 z
+    </Geometry>
+    
+    
 </ResourceDictionary>

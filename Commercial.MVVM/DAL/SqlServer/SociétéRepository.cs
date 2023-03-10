@@ -1,7 +1,6 @@
 ﻿using Commercial.Model;
 using System.Collections.ObjectModel;
 using Commercial.SqlServer;
-using System.Windows.Navigation;
 using System.Linq;
 using System.Data.Entity.Migrations;
 

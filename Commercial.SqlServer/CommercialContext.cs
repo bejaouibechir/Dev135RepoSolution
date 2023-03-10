@@ -5,7 +5,10 @@ namespace Commercial.SqlServer
 {
     public class CommercialContext: DbContext
     {
+        public CommercialContext()
+        {
 
+        }
         public CommercialContext(string connectionString="CommercialConnection")
             :base(connectionString)
         {

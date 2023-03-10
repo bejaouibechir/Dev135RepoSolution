@@ -1,0 +1,76 @@
+﻿<Window x:Class="Commercial.MVVM.AddSociétéWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Commercial.MVVM"
+        xmlns:vm="clr-namespace:Commercial.MVVM.ViewModels"
+        mc:Ignorable="d"
+         Title="Ajouter une société" 
+        MinHeight="400" MinWidth="700"
+        MaxHeight="400" MaxWidth="700"
+        Height="400" Width="700">
+    <Window.DataContext>
+        <vm:AddSociétéViewModel/>
+    </Window.DataContext>
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Société:" Foreground="#2B579f" Name="txtCodeClient" FontSize="25" VerticalAlignment="Center" Margin="20,0,0,0" Grid.ColumnSpan="2"/>
+
+        
+        <TextBlock Text="Raison:" Foreground="#2B579f" Margin="20,0,0,0" Grid.Row="1" FontSize="20" VerticalAlignment="Center"/>
+        <TextBlock Text="Chiffre d'affaires:" Foreground="#2B579f" Margin="20,0,0,0" Grid.Row="2" FontSize="20" VerticalAlignment="Center"/>
+        <TextBlock Text="Nombre de clients:" Foreground="#2B579f" Margin="20,0,0,0" Grid.Row="3" FontSize="20" VerticalAlignment="Center"/>
+        <TextBlock Text="Dettes:" Foreground="#2B579f" Margin="20,0,0,0" Grid.Row="4" FontSize="20" VerticalAlignment="Center"/>
+        <TextBlock Text="Observation:" Foreground="#2B579f" Margin="20,0,0,0" Grid.Row="5" FontSize="20" VerticalAlignment="Center"/>
+
+        
+        <TextBox  Text="{Binding SociétéInfo.Raison,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"  Margin="5" Grid.Column="1" FontSize="20"/>
+        <TextBox  Text="{Binding SociétéInfo.Chiffre_Affaires,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="2"  Margin="5" Grid.Column="1" FontSize="20"/>
+        <TextBox  Text="{Binding SociétéInfo.NombreClients,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="3"  Margin="5" Grid.Column="1" FontSize="20"/>
+        <TextBox  Text="{Binding SociétéInfo.Dettes,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="4"  Margin="5" Grid.Column="1" FontSize="20"/>
+        <TextBox  Text="{Binding SociétéInfo.Observation,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Row="5"  Margin="5" Grid.Column="1" FontSize="20"/>
+
+        <StackPanel  Margin="0,2,2,0"  Grid.Row="7" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Margin="2" Height="32" Width="120" Name="CancelBtn"  FontSize="20"
+                     Command="{Binding CancelCommand}"
+                     Style="{StaticResource addsociétébtnstyle}"
+                    >
+                <Button.Content>
+                    <Viewbox>
+                        <StackPanel Margin="2" Orientation="Horizontal">
+                            <Path Fill="#2B579f" Data="{StaticResource cancel}"/>
+                            <TextBlock Text="Annuler" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Viewbox>
+                </Button.Content>
+            </Button>
+            <Button Margin="2" 
+                    Command="{Binding SaveCommand}"
+                    Height="32" Width="140"  Name="SaveBtn" FontSize="18" 
+                    Style="{StaticResource addsociétébtnstyle}"
+                    >
+                <Button.Content>
+                    <Viewbox>
+                        <StackPanel Margin="2" Orientation="Horizontal">
+                            <Path Fill="#2B579f" Data="{StaticResource save}"/>
+                            <TextBlock Name="actionTextBlock" Text="Enregistrer" Margin="5,0,0,0"/>
+                        </StackPanel>
+                    </Viewbox>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

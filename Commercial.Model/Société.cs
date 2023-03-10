@@ -18,8 +18,7 @@ namespace Commercial.Model
         public string Image { get; set; }
         public string Observation { get; set; }
         public DateTime? Modification { get; set; } = DateTime.Now;
-
-
+   
         //Propriétés de naviguation
         public virtual ICollection<Responsable> Responsables { get; set; }
         public virtual ICollection<Client> Clients { get; set; }

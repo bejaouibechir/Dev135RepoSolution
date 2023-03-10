@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Commercial.MVVM.Helpers
 {
-    public class DeletegateCommand : ICommand //Commande routée
+    public class DeletegateCommand<T> : ICommand //Commande routée
     {
-        private readonly Action<object> _execute;
-        private readonly Func<object, bool> _canexecute;
+        private readonly Action<T> _execute;
+        private readonly Func<T, bool> _canexecute;
 
         public event EventHandler CanExecuteChanged
         {
@@ -19,20 +23,20 @@ namespace Commercial.MVVM.Helpers
 
         }
 
-        public DeletegateCommand(Action<object> execute,Func<object,bool> canexecute )
+        public DeletegateCommand(Action<T> execute, Func<T, bool> canexecute)
         {
             _execute = execute;
             _canexecute = canexecute;
-        }  
+        }
 
         public bool CanExecute(object parameter)
         {
-            return _canexecute(parameter);
+            return _canexecute((T)parameter);
         }
 
         public void Execute(object parameter)
         {
-            _execute(parameter);
+            _execute((T)parameter);
         }
     }
 }
